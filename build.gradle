@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+group = 'io.github.returnly.viewer'
+version = '0.1.0-SNAPSHOT'
+
+compileJava {
+    options.compilerArgs += ["-parameters"]
+    options.fork = true
+    options.forkOptions.executable = 'C:\\Program Files\\Java\\jdk-17\\bin\\javac.exe'
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.papermc.io/repository/maven-public/'}
+    maven { url 'https://repo.aikar.co/content/groups/aikar/' }
+    maven { url 'https://hub.spigotmc.org/nexus/content/groups/public/' }
+}
+
+dependencies {
+    compileOnly 'io.papermc.paper:paper-api:1.20.2-R0.1-SNAPSHOT'
+
+    implementation 'co.aikar:acf-paper:0.5.1-SNAPSHOT'
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+shadowJar {
+    archiveFileName = "Viewer-${project.version}.jar"
+    archiveClassifier.set('')
+
+    relocate 'co.aikar.commands', 'io.github.meta.metacore.acf'
+    relocate 'co.aikar.locales', 'io.github.meta.metacore.locales'
+
+    manifest {
+        attributes 'Main-Class': 'io.github.returnly.viewer.Viewer'
+    }
+}
+
+build.dependsOn shadowJar
