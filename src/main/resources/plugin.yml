@@ -1,0 +1,6 @@
+name: Viewer
+version: ${project.version}
+description: A cinematic maker plugin
+author: Returnly
+main: io.github.returnly.viewer.Viewer
+api-version: 1.13
