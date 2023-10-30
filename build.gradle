@@ -35,8 +35,8 @@ shadowJar {
     archiveFileName = "Viewer-${project.version}.jar"
     archiveClassifier.set('')
 
-    relocate 'co.aikar.commands', 'io.github.meta.metacore.acf'
-    relocate 'co.aikar.locales', 'io.github.meta.metacore.locales'
+    relocate 'co.aikar.commands', 'io.github.returnly.viewer.acf'
+    relocate 'co.aikar.locales', 'io.github.returnly.viewer.locales'
 
     manifest {
         attributes 'Main-Class': 'io.github.returnly.viewer.Viewer'
